@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Pearl July — Graduation Wishlist & RSVP</title>
+<style>
+  :root{
+    --bg:#0b0b0b;
+    --gold:#d4af37;
+    --muted:#cfcfcf;
+    --card:#111;
+    --accent:#ffffff;
+    --glass: rgba(255,255,255,0.03);
+  }
+  *{box-sizing:border-box;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;}
+  body{margin:0;background:linear-gradient(180deg,#050505 0%, #090909 60%);color:var(--accent);min-height:100vh}
+  .wrap{max-width:980px;margin:28px auto;padding:28px;}
+  header{display:flex;gap:20px;align-items:center;justify-content:space-between;flex-wrap:wrap;}
+  .logo {display:flex;gap:14px;align-items:center}
+  .logo .seal{width:64px;height:64px;border-radius:12px;background:linear-gradient(135deg,rgba(212,175,55,0.95), rgba(212,175,55,0.6));display:flex;align-items:center;justify-content:center;font-weight:900;color:#050505;font-size:22px;box-shadow:0 6px 18px rgba(0,0,0,0.6)}
+  h1{margin:0;font-family: "Playfair Display", Georgia, serif;font-size:28px;color:var(--gold);letter-spacing:0.2px}
+  p.lead{margin:8px 0 0;color:var(--muted)}
+  .grid{display:grid;grid-template-columns: 1fr 380px;gap:28px;margin-top:22px;}
+  @media (max-width:920px){
+    .grid{grid-template-columns:1fr;}
+    header{justify-content:center;}
+    .logo h1{font-size:20px;}
+  }
+  .card{background:linear-gradient(180deg,var(--card),#0a0a0a);padding:18px;border-radius:12px;box-shadow: 0 6px 30px rgba(0,0,0,0.6);border:1px solid rgba(212,175,55,0.06); color: var(--accent);}
+  .invite {padding:26px;border-radius:12px;background:linear-gradient(180deg,#070707,#0f0f0f); text-align:center}
+  .invite h2{color:var(--gold);margin:6px 0 2px}
+  .invite p{color:var(--muted);margin:0 0 12px}
+  .details{display:flex;flex-direction:column;gap:6px;margin-top:10px}
+  .detail-row{display:flex;justify-content:space-between;padding:8px 10px;border-radius:8px;background:var(--glass);font-size:14px;color:var(--muted)}
+  .btn{background:var(--gold);color:#070707;border:none;padding:10px 14px;border-radius:9px;cursor:pointer;font-weight:700;transition: background-color 0.3s ease;}
+  .btn:hover{background-color:#b38f1f;}
+  .btn.secondary{background:transparent;border:1px solid rgba(212,175,55,0.28);color:var(--muted)}
+  .wishlist{display:flex;flex-direction:column;gap:12px}
+  .wish-item{display:flex;justify-content:space-between;align-items:center;padding:10px;border-radius:10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02)}
+  .wish-item .title{font-weight:700}
+  .wish-item.taken{opacity:0.5;text-decoration:line-through}
+  .small{font-size:13px;color:var(--muted)}
+  .form-row{display:flex;gap:8px;flex-wrap:wrap}
+  input[type=text], input[type=tel], select {width:100%;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:transparent;color:var(--accent)}
+  label.small{display:block;font-size:13px;margin-bottom:6px;color:var(--muted)}
+  .guest-list{max-height:220px;overflow:auto;padding:8px;border-radius:8px;background:rgba(255,255,255,0.02)}
+  footer{margin-top:26px;text-align:center;color:var(--muted);font-size:13px}
+  .controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:14px}
+  .muted{color:var(--muted)}
+
+  /* Responsive iframe container */
+  .iframe-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 140%; /* Aspect ratio: height/width * 100% */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.6);
+    border: 1px solid rgba(212,175,55,0.06);
+    background: var(--card);
+  }
+  .iframe-container iframe {
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    border:0;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="logo">
+        <div class="seal">PJ</div>
+        <div>
+          <h1>Pearl July — Graduation Gala</h1>
+          <p class="lead">Black Tie Gala · Friday, 17 Oct 2025 · 6:00 PM — 10:00 PM</p>
+        </div>
+      </div>
+      <div style="text-align:right">
+        <button class="btn" id="downloadInvite">Download Invite</button>
+        <button class="btn secondary" id="copyLink">Copy Page Link</button>
+      </div>
+    </header>
+
+    <div class="grid">
+      <!-- left column -->
+      <section>
+        <div class="card invite" id="inviteCard">
+          <h2>Graduation Black Tie Gala</h2>
+          <p>An elegant evening to celebrate <strong>Pearl July</strong>'s graduation</p>
+          <div class="details">
+            <div class="detail-row"><span>Date</span><strong>Friday, 17 October 2025</strong></div>
+            <div class="detail-row"><span>Time</span><strong>6:00 PM — 10:00 PM</strong></div>
+            <div class="detail-row"><span>Venue</span><strong>Hotel to be communicated</strong></div>
+            <div class="detail-row"><span>Dress Code</span><strong style="color:var(--gold)">Formal Black Tie — BLACK ONLY</strong></div>
+          </div>
+          <div style="margin-top:18px;">
+            <p class="small">Please RSVP by <strong>Friday, 10 October 2025</strong>. All guests (including plus ones) cover their own dinner bills.</p>
+            <div class="controls">
+              <button class="btn secondary" onclick="document.getElementById('wishlistAdd').focus()">Add Wish</button>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:20px"></div>
+
+        <div class="card">
+          <h3 style="margin:0 0 12px">🎁 Wishlist</h3>
+          <div class="wishlist" id="wishlist">
+            <!-- Wishlist items will appear here -->
+          </div>
+
+          <div style="margin-top:12px;">
+            <label class="small">Add an item:</label>
+            <div style="display:flex;gap:8px">
+              <input id="wishlistAdd" placeholder="e.g. Apple Watch" type="text" />
+              <button class="btn" id="addWishBtn">Add</button>
+            </div>
+            <p class="small muted" style="margin-top:10px">When someone clicks "I'll get this", it marks the item as taken — anonymous to you.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- right column -->
+      <aside>
+        <div class="card" style="text-align:center">
+          <h3 style="margin:0 0 12px">✉️ RSVP</h3>
+          <p class="small">Please RSVP using the form below.</p>
+          <div class="iframe-container">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScf6nUcg9bWJZl2in7MSOHQoAFySZTfoZjxFmWjeqcnvnl4vA/viewform?embedded=true" 
+              frameborder="0" marginheight="0" marginwidth="0" 
+              title="Pearl July Graduation RSVP Form">Loading…</iframe>
+          </div>
+        </div>
+
+        <div style="height:18px"></div>
+
+        <div class="card" style="text-align:center">
+          <h3 style="margin:0 0 10px">Share</h3>
+          <p class="small">Share this link or copy it to WhatsApp / IG</p>
+          <div style="margin-top:12px" class="controls">
+            <button class="btn" id="shareWhatsapp">Share WhatsApp</button>
+            <button class="btn" id="shareCopy">Copy Link</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <footer>
+      <div class="muted">Made with 🎉 for Pearl July · Save the date: 17 Oct 2025</div>
+    </footer>
+  </div>
+
+<script>
+/* --- Simple local storage state for wishlist --- */
+const LS_WISHLIST = 'pj_wishlist_v1';
+const wishlistEl = document.getElementById('wishlist');
+
+function loadWishlist(){
+  let w = JSON.parse(localStorage.getItem(LS_WISHLIST) || '[]');
+  if(w.length===0){
+    w = [
+      {id: id(), title: "A job (urgent)", taken:false},
+      {id: id(), title: "Apple Watch", taken:false},
+      {id: id(), title: "Perfume", taken:false},
+      {id: id(), title: "Heels", taken:false},
+      {id: id(), title: "Flowers", taken:false},
+      {id: id(), title: "Gift card / Money", taken:false},
+    ];
+    localStorage.setItem(LS_WISHLIST, JSON.stringify(w));
+  }
+  renderWishlist(w);
+}
+
+function renderWishlist(items){
+  wishlistEl.innerHTML = '';
+  items.forEach(it=>{
+    const node = document.createElement('div');
+    node.className = 'wish-item' + (it.taken? ' taken':'');
+    node.innerHTML = `<div>
+                        <div class="title">${escapeHtml(it.title)}</div>
+                        <div class="small muted">#${it.id}</div>
+                      </div>
+                      <div style="display:flex;gap:8px;align-items:center">
+                        <button class="btn secondary" onclick="toggleTaken('${it.id}')">${it.taken? 'Taken':'I\'ll get this'}</button>
+                        <button class="btn" onclick="removeWish('${it.id}')">Remove</button>
+                      </div>`;
+    wishlistEl.appendChild(node);
+  });
+}
+
+function addWish(title){
+  if(!title || !title.trim()) return;
+  const items = JSON.parse(localStorage.getItem(LS_WISHLIST)||'[]');
+  items.unshift({id:id(), title: title.trim(), taken:false});
+  localStorage.setItem(LS_WISHLIST, JSON.stringify(items));
+  renderWishlist(items);
+  document.getElementById('wishlistAdd').value = '';
+}function toggleTaken(idVal){
+  const items = JSON.parse(localStorage.getItem(LS_WISHLIST)||'[]');
+  const it = items.find(x=>x.id===idVal);
+  if(it) it.taken = !it.taken;
+  localStorage.setItem(LS_WISHLIST, JSON.stringify(items));
+  renderWishlist(items);
+}
+
+function removeWish(idVal){
+  let items = JSON.parse(localStorage.getItem(LS_WISHLIST)||'[]');
+  items = items.filter(x=>x.id!==idVal);
+  localStorage.setItem(LS_WISHLIST, JSON.stringify(items));
+  renderWishlist(items);
+}
+
+/* --- utils & events --- */
+function id(){ return Math.random().toString(36).slice(2,8).toUpperCase(); }
+function escapeHtml(unsafe) { return unsafe.replace(/[&<"']/g, function(m){return ({'&':'&amp;','<':'&lt;','"':'&quot;',"'":'&#039;'})[m];}); }
+
+document.getElementById('addWishBtn').onclick = ()=> addWish(document.getElementById('wishlistAdd').value);
+document.getElementById('wishlistAdd').addEventListener('keydown', (e)=>{ if(e.key==='Enter') { addWish(e.target.value); e.preventDefault(); } });
+
+document.getElementById('shareWhatsapp').onclick = ()=>{
+  const text = encodeURIComponent(`Pearl July's Graduation Gala — 17 Oct 2025. RSVP & wishlist: ${location.href}`);
+  window.open(`https://wa.me/?text=${text}`, '_blank');
+};
+document.getElementById('shareCopy').onclick = copyPageLink;
+document.getElementById('copyLink').onclick = copyPageLink;
+function copyPageLink(){ navigator.clipboard?.writeText(location.href).then(()=> alert('Link copied to clipboard!')); }
+
+/* download/print invite */
+document.getElementById('downloadInvite').addEventListener('click', ()=>{
+  const inviteHTML = document.getElementById('inviteCard').outerHTML;
+  const w = window.open('', '_blank', 'width=900,height=1200');
+  const doc = w.document;
+  doc.write(`<html><head><title>Invite — Pearl July</title>
+    <style>body{background:#000;color:#fff;font-family:Inter,system-ui;padding:40px} .invite{background:#070707;padding:30px;border-radius:10px;border:6px solid #d4af37}</style></head><body>${inviteHTML}</body></html>`);
+  doc.close();
+  setTimeout(()=> w.print(), 300);
+});
+
+loadWishlist();
+</script>
+</body>
+</html>
